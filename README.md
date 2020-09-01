@@ -1,4 +1,6 @@
-This folder contains analysis for the Ceres2030 Team 6, who conducted a semi-automatic systematic review of over 18,000 articles. The goal was to identify solutions for small farms to adapt to climate change - we focused on water scarce environments. This analysis is under review at the academic journal Nature Sustainability. A link to the article will be provided once published. The manuscript's current citation is:
+This folder contains analysis for our [Ceres2030 Team 6](https://ceres2030.org/water-scarce-solutions/), who conducted a semi-automatic systematic review of over 18,000 articles. 
+
+The goal was to identify solutions for small farms to adapt to climate change - we focused on water scarce environments. This analysis is under review at the academic journal Nature Sustainability. A link to the article will be provided once published. The manuscript's current citation is:
 
 Ricciardi, V., Wane, A., Singh Sidhu, B., Goode, C., Solomon, D., McCullough, E., Diekmann, F., Porciello, J., Jain, M., Randall, N., Mehrabi, Z.
 Evidence synthesis: Funding research for small-scale farmers in water scarce regions to achieve SDG 2.3. In Review. Nature Sustainability.
