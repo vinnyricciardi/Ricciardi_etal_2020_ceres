@@ -21,7 +21,7 @@ library(waffle)
 # Define ggplot theme
 ######################################
 base_size = 14
-theme_set(theme_tufte(base_family = 'Arial', base_size = base_size))
+theme_set(theme_tufte(base_family = 'ArialMT', base_size = base_size))
 tg <- theme_get()
 
 ggplot <- function(...) ggplot2::ggplot(...) + 
@@ -35,7 +35,7 @@ ggplot <- function(...) ggplot2::ggplot(...) +
 ######################################
 
 viewplot <- function(width, height, dpi = 72) {
-  ggsave('C:/Users/wb551716/OneDrive - WBG/Documents/R_tmpPlotviewer/tmp.png', 
+  ggsave('C:/Users/wb551716/OneDrive - WBG/Documents/R_tmpPlotviewer/tmp.pdf', 
          width = width,
          height = height, 
          dpi = dpi)
@@ -174,13 +174,13 @@ ggplot() +
   scale_color_manual(values = '#d6d7dc') +
   labs(fill = element_blank()) +
   coord_equal(ratio = 1) + 
-  theme_map(font_family = 'Arial', font_size = base_size) +
+  theme_map(font_family = 'ArialMT', font_size = base_size) +
   xlim(c(-1.15e+07, 1.3e+07)) +
   guides(color = guide_legend(label.position = 'bottom',
                               title = '', 
                               label.hjust = 0,
                               keywidth = 1.5)) +
-  theme(plot.subtitle = element_text(hjust = .49, vjust = -140),
+  theme(plot.subtitle = element_text(hjust = .49, vjust = -95),
         legend.position = 'bottom',
         legend.justification = c(.5,0),
         legend.key  =  element_blank(),
@@ -188,7 +188,8 @@ ggplot() +
         legend.text = element_text(size = 8)) +
   ggtitle('', subtitle = 'Number of Studies') 
 
-ggsave('output/fig_map_n.png', width = 7, height = 7)
+ggsave('output/fig_map_n.pdf', dpi = 500)
+
 
 
 ######################################
@@ -243,8 +244,10 @@ p <- ggplot(tmp1, aes(country, log(tot_fs+1))) +
            override.aes = list(size = 5))) +
            # label.hjust = -5)) +
   theme_minimal(base_size = base_size) +
-  theme(axis.ticks.y = element_blank(),
+  theme(#axis.ticks.y = element_blank(),
+        axis.ticks.x = element_line(size = .025),
         axis.text.y = element_text(hjust = 0),
+        axis.line = element_line(size = .025),
         # plot.title = element_text(hjust = .5),
         # plot.subtitle = element_text(hjust = .5),
         panel.grid = element_blank(),
@@ -272,7 +275,7 @@ l <- ggplot() +
  
 p + draw_plot(l, 10, 2.8, 5, 5, .9)
 
-ggsave('output/fig_bar_needs.png', width = 7, height = 7, dpi = 72)
+ggsave('output/fig_bar_needs.pdf', width = 7, height = 7, dpi = 500)
 
 
 ######################################
@@ -359,13 +362,13 @@ ggplot(tmp, aes(fill = studytype, values = value)) +
         # axis.text.x = element_text(size = base_size),
         plot.title = element_text(hjust = .5),
         plot.subtitle = element_text(hjust = .5),
-        strip.text.y.left = element_text(angle = 0, hjust = 0)) 
+        strip.text.y.left = element_text(angle = 0, hjust = 0))
   # guides(fill = guide_legend(reverse = F, nrow = 2, byrow = T, 
                              # title.position = 'top'))
 
 
 
-ggsave('output/fig_matrix.png', width = 8, height = 6)
+ggsave('output/fig_matrix.pdf', width = 8, height = 6, dpi = 500)
 
 
 ######################################
@@ -411,13 +414,13 @@ tmp %>%
   labs(fill = '') +
   xlab('') +
   ylab('Number of Studies\n(Cumulative)\n') +
-  theme_minimal(base_family = 'Arial', base_size = base_size) +
+  theme_minimal(base_family = 'ArialMT', base_size = base_size) +
   theme(legend.position = 'bottom',
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 
 
-ggsave('output/fig_system.png', width = 9, height = 4)
+ggsave('output/fig_system.pdf', width = 9, height = 4, dpi = 500)
 
 
 ######################################
@@ -461,10 +464,12 @@ p1 <- tmp %>%
   labs(fill = '') +
   xlab('') +
   ylab('Number of Studies\n(Cumulative)\n') +
-  xlim(1975, 2020) +
-  theme_minimal(base_family = 'Arial', base_size = base_size) +
+  coord_cartesian(xlim = c(1975, 2020)) +
+  theme_minimal(base_family = 'ArialMT', base_size = base_size) +
   theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(size = .025),
+        axis.ticks = element_line(size = .025))
 
 
 dev.off()
@@ -472,7 +477,7 @@ g1 <- ggplotGrob(p1)
 g1$layout$clip[g1$layout$name == 'panel'] = 'off'
 
 
-# ggsave('output/fig_gender_enviro.png', width = 9, height = 4)
+# ggsave('output/fig_gender_enviro.pdf', width = 9, height = 4, dpi = 500)
 
 
 ######################################
@@ -531,29 +536,36 @@ lbrl_h20 <- tmp %>%
 p2 <- ggplot(tmp, aes(year, nc, fill = keyword_subcategory)) +
   geom_area(stat = 'identity') +
   labs(fill = '') +
+  coord_cartesian(xlim = c(1975, 2020)) +
   xlab('') +
   ylab('Number of Studies\n(Cumulative)\n') +
-  theme_minimal(base_family = 'Arial', base_size = base_size) +
+  theme_minimal(base_family = 'ArialMT', base_size = base_size) +
   theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(size = .025),
+        axis.ticks = element_line(size = .025))
 
 g <- ggplotGrob(p2)
 g$layout$clip[g$layout$name == 'panel'] = 'off'
 
 pb <- ggplot() + 
   geom_blank() + 
-  ggtitle('Cross-Cutting Themes') + 
+  ggtitle('') + 
   theme(plot.title = element_text(hjust = .5),
         plot.subtitle = element_text(hjust = .5),
         panel.background = element_blank(),
         axis.line = element_blank())
 
-plot_grid(pb, p1, g, ncol = 1, labels = c('', '', ''), greedy = F,
-          rel_heights = c(.2,1,1),
+plot_grid(p1, g, 
+          ncol = 1, 
+          labels = c('', ''), 
+          greedy = F,
+          align = 'v',
+          # rel_heights = c(.2,1,1),
           vjust = -1)
 
 
-ggsave('output/fig_cross_cutting.png', width = 9, height = 7)
+ggsave('output/fig_cross_cutting.pdf', width = 9, height = 7, dpi = 500)
 
 
 
@@ -653,7 +665,7 @@ ggplot(tmp, aes(GroupName, p_irr_fs, fill = size)) +
         axis.text.y = element_text(hjust = 0)) +
   labs(fill = element_blank()) 
 
-ggsave('output/fig_irrigation_gap_country.png', width = 8, height = 6)
+ggsave('output/fig_irrigation_gap_country.pdf', width = 8, height = 6, dpi = 500)
 
 
 
@@ -662,7 +674,8 @@ ggsave('output/fig_irrigation_gap_country.png', width = 8, height = 6)
 tmp <- df_irr %>%
   filter(is.finite(p_irr_fs) & 
            !is.na(p_irr_fs)) %>%
-  na.omit()
+  na.omit() %>%
+  mutate(size = paste(size, 'farms'))
   
 ggplot() +
   geom_map(data = map, 
@@ -685,13 +698,13 @@ ggplot() +
   scale_color_manual(values = '#d6d7dc') +
   labs(fill = element_blank()) +
   coord_equal(ratio = 1) + 
-  theme_map(font_family = 'Arial', font_size = base_size) +
+  theme_map(font_family = 'ArialMT', font_size = base_size) +
   xlim(c(-1.15e+07, 1.3e+07)) +
   guides(color = guide_legend(label.position = 'bottom',
                               title = '', 
                               label.hjust = 0,
                               keywidth = .5)) +
-  theme(plot.subtitle = element_text(hjust = .49, vjust = -165),
+  theme(plot.subtitle = element_text(hjust = .49, vjust = -155),
         legend.position = 'bottom',
         legend.justification = c(.5,0),
         legend.key  =  element_blank(),
@@ -701,7 +714,7 @@ ggplot() +
   facet_grid(rows = vars(size),
              cols = vars(waterScarce))
 
-ggsave('output/fig_irrigation_gap_country_SI.png', width = 8, height = 8)
+ggsave('output/fig_irrigation_gap_country_SI.pdf', width = 8, height = 8, dpi = 500)
 
 
 # Global stat on irrigation
@@ -765,12 +778,12 @@ tmp %>%
   labs(fill = '') +
   xlab('') +
   ylab('Percent of Studies per Year\n') +
-  theme_minimal(base_family = 'Arial', base_size = base_size) +
+  theme_minimal(base_family = 'ArialMT', base_size = base_size) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 
 
-ggsave('output/fig_themes_time_percent.png', width = 10, height = 6)
+ggsave('output/fig_themes_time_percent.pdf', width = 10, height = 6, dpi = 500)
 
 
 
@@ -796,11 +809,11 @@ ggplot(tmp, aes(year, n)) +
   labs(fill = '') +
   xlab('') +
   ylab('Number of Studies\n') +
-  theme_minimal(base_family = 'Arial', base_size = base_size) +
+  theme_minimal(base_family = 'ArialMT', base_size = base_size) +
   theme(legend.position = 'bottom',
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())
 
 
-ggsave('output/fig_outcomes_time.png', width = 9, height = 4)
+ggsave('output/fig_outcomes_time.pdf', width = 9, height = 4, dpi = 500)
 
